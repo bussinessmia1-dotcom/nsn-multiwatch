@@ -2,107 +2,233 @@
 
 import { useState } from "react";
 
-type Video = {
-  id: {
-    videoId: string;
-  };
-  snippet: {
-    title: string;
-    thumbnails: {
-      medium: {
-        url: string;
-      };
-    };
-  };
-};
+export default function NSNMultiwatchStream() {
+  const streams = [
+    {
+      title: "Pahrul Reyza",
+      channelId: "UCsUhlZAanKWUsZxqbPbjAOw",
+    },
+    {
+      title: "Abanosz",
+      channelId: "UCMt0OVcI0tCzm6Qtcy3Lfhg",
+    },
+    {
+      title: "Hendy Ramadhan",
+      channelId: "UCIwQP2dkoyj73k0zhD0bnXg",
+    },
+    {
+      title: "Rizki Ferdian",
+      channelId: "UCa1Dz1yPj3ZyL9Nwe9cnI0w",
+    },
+    {
+      title: "Nareyy",
+      channelId: "UCIy6eevxmIsg_Hwete6KOkQ",
+    },
+    {
+      title: "Lyn Stach",
+      channelId: "UC93Nk2n6fWQ_8B0vQu2b81Q",
+    },
+    {
+      title: "Tom Keyt",
+      channelId: "UCPYq_0HHYSyHf5keHArEnqA",
+    },
+    {
+      title: "MAMATCHA",
+      channelId: "UCuO21nkZB_6HBgcZ0vQqpaw",
+    },
+    {
+      title: "Ciyung Kocak",
+      channelId: "UCQdJ9LxdDvElCk9Ex80VEaQ",
+    },
+    {
+      title: "Doeeng",
+      channelId: "UCFDNsNSeqrsbQdkFqLZmfeQ",
+    },
+    {
+      title: "EL NEKELINS",
+      channelId: "UCB3UUwxXfovWYg2s6cGtBng",
+    },
+    {
+      title: "Zaskiachr",
+      channelId: "UCFwabDZK9ncWRBGffXIKcJA",
+    },
+    {
+      title: "IC : CUTEE PIEE",
+      channelId: "UC6Y8i9j9EBv6waC4G-8cMfg",
+    },
+    {
+      title: "Khaizurè",
+      channelId: "UCn_RIK7MNYfRR79dCj4ZnWg",
+    },
+    {
+      title: "Eyangsihir",
+      channelId: "UCCl65jcmEBhnrCPm5_UwoQg",
+    },
+    {
+      title: "N4SRUL",
+      channelId: "UCNeNWqNExbtfNoQXrpdaOeg",
+    },
+    {
+      title: "Hunt.969",
+      channelId: "UCDImuPELfrIBEynkSMYn0Yw",
+    },
+    {
+      title: "Pobla",
+      channelId: "UCgXpvTgB-pbxj90y1xLyKCA",
+    },
+    {
+      title: "ipulsadila",
+      channelId: "UCRo_r2XTjJctTxBFpYL5erg",
+    },
+    {
+      title: "claireaja",
+      channelId: "UCLtAoc1vH3m_kE1CCKJgtNw",
+    },
 
-export default function Home() {
-  const [query, setQuery] = useState<string>("");
-  const [videos, setVideos] = useState<Video[]>([]);
-  const [watchList, setWatchList] = useState<string[]>([]);
+  ];
 
-  const searchVideos = async () => {
-    const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
+  const [selectedStreams, setSelectedStreams] = useState(
+    streams.slice(0, 4)
+  );
 
-    const res = await fetch(
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&maxResults=8&key=${apiKey}`
+  const toggleStream = (stream) => {
+    const exists = selectedStreams.find(
+      (item) => item.channelId === stream.channelId
     );
 
-    const data = await res.json();
-
-    setVideos(data.items || []);
-  };
-
-  const addToWatch = (videoId: string) => {
-    if (watchList.includes(videoId)) return;
-
-    setWatchList([...watchList, videoId]);
+    if (exists) {
+      setSelectedStreams(
+        selectedStreams.filter(
+          (item) => item.channelId !== stream.channelId
+        )
+      );
+    } else {
+      setSelectedStreams([...selectedStreams, stream]);
+    }
   };
 
   return (
-    <main className="min-h-screen bg-black text-white p-6">
-      <h1 className="text-5xl font-bold mb-8 text-center">
-        NSN MultiWatch
-      </h1>
+    <div className="min-h-screen bg-black text-white">
+      {/* BACKGROUND */}
+      <div className="fixed inset-0 bg-[radial-gradient(circle_at_top,rgba(255,215,0,0.12),transparent_40%)] pointer-events-none" />
 
-      <div className="flex gap-2 mb-8">
-        <input
-          type="text"
-          placeholder="Search YouTube..."
-          className="flex-1 p-3 rounded text-black"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
+      {/* HEADER */}
+      <header className="sticky top-0 z-50 border-b border-yellow-500/20 bg-black/90 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
+          <div>
+            <h1 className="text-3xl md:text-5xl font-black tracking-[0.3rem] text-yellow-400">
+              NSN MULTIWATCH
+            </h1>
 
-        <button
-          onClick={searchVideos}
-          className="bg-red-600 px-6 py-3 rounded"
-        >
-          Search
-        </button>
-      </div>
+            <p className="mt-2 text-xs md:text-sm uppercase tracking-[0.25rem] text-yellow-200/60">
+              Watch community livestreams in one place
+            </p>
+          </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-        {videos.map((video) => (
-          <div
-            key={video.id.videoId}
-            className="bg-zinc-900 rounded overflow-hidden"
-          >
-            <img
-              src={video.snippet.thumbnails.medium.url}
-              alt={video.snippet.title}
-            />
+          {/* NSN LOGO */}
+          <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-yellow-500 bg-gradient-to-br from-yellow-300 to-yellow-600 text-xl font-black text-black shadow-2xl shadow-yellow-500/40">
+            NSN
+          </div>
+        </div>
+      </header>
 
-            <div className="p-3">
-              <p className="text-sm mb-3">
-                {video.snippet.title}
+      {/* MAIN */}
+      <main className="mx-auto max-w-7xl p-4 md:p-8">
+        {/* STREAM SELECTOR */}
+        <div className="mb-8 rounded-3xl border border-yellow-500/20 bg-zinc-950 p-5 shadow-xl shadow-yellow-500/5">
+          <div className="mb-5 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div>
+              <h2 className="text-2xl font-black text-yellow-400">
+                Select Streams
+              </h2>
+
+              <p className="mt-1 text-sm text-zinc-500">
+                Choose streams for multiwatch mode
               </p>
+            </div>
 
-              <button
-                onClick={() => addToWatch(video.id.videoId)}
-                className="bg-red-500 px-3 py-2 rounded w-full"
-              >
-                Add
-              </button>
+            <div className="rounded-full border border-yellow-500/20 bg-yellow-500/10 px-5 py-3 text-sm font-bold text-yellow-400">
+              {selectedStreams.length} Active Streams
             </div>
           </div>
-        ))}
-      </div>
 
-      <h2 className="text-3xl font-bold mb-4">
-        Watching Now
-      </h2>
+          <div className="flex flex-wrap gap-3">
+            {streams.map((stream, index) => {
+              const active = selectedStreams.find(
+                (item) => item.channelId === stream.channelId
+              );
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {watchList.map((videoId) => (
-          <iframe
-            key={videoId}
-            src={`https://www.youtube.com/embed/${videoId}`}
-            className="w-full aspect-video rounded"
-            allowFullScreen
-          />
-        ))}
-      </div>
-    </main>
+              return (
+                <button
+                  key={index}
+                  onClick={() => toggleStream(stream)}
+                  className={`rounded-2xl border px-4 py-3 text-sm font-bold transition-all duration-300 ${
+                    active
+                      ? "border-yellow-400 bg-yellow-500 text-black shadow-lg shadow-yellow-500/30"
+                      : "border-yellow-500/20 bg-zinc-900 text-yellow-300 hover:border-yellow-400/40 hover:bg-zinc-800"
+                  }`}
+                >
+                  {stream.title}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* STREAM GRID */}
+        <div className="grid gap-8 md:grid-cols-2">
+          {selectedStreams.map((stream, index) => (
+            <div
+              key={index}
+              className="group overflow-hidden rounded-3xl border border-yellow-500/20 bg-zinc-950 transition-all duration-300 hover:-translate-y-1 hover:border-yellow-400/40 hover:shadow-2xl hover:shadow-yellow-500/10"
+            >
+              {/* TOP BAR */}
+              <div className="flex items-center justify-between border-b border-yellow-500/10 px-5 py-4">
+                <div>
+                  <h2 className="font-bold text-yellow-400">
+                    {stream.title}
+                  </h2>
+
+                  <p className="text-xs text-zinc-500">
+                    NSN Community Stream
+                  </p>
+                </div>
+
+                {/* LIVE BADGE */}
+                <div className="flex items-center gap-2 rounded-full border border-red-500/30 bg-red-500/10 px-3 py-1">
+                  <div className="h-2.5 w-2.5 animate-pulse rounded-full bg-red-500" />
+
+                  <span className="text-xs font-semibold uppercase tracking-wide text-red-400">
+                    LIVE
+                  </span>
+                </div>
+              </div>
+
+              {/* PLAYER */}
+              <div className="aspect-video overflow-hidden bg-black">
+                <iframe
+                  src={`https://www.youtube.com/embed/live_stream?channel=${stream.channelId}&autoplay=1&mute=1`}
+                  title={stream.title}
+                  allow="autoplay; encrypted-media"
+                  allowFullScreen
+                  className="h-full w-full"
+                />
+              </div>
+
+              {/* FOOTER */}
+              <div className="flex items-center justify-between px-5 py-4">
+                <div className="text-sm text-zinc-400">
+                  Multiwatch Mode Active
+                </div>
+
+                <button className="rounded-xl bg-yellow-500 px-4 py-2 text-sm font-bold text-black transition hover:bg-yellow-400">
+                  Watching
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </main>
+    </div>
   );
 }

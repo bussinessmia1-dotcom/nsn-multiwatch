@@ -91,7 +91,7 @@ export default function NSNMultiwatchStream() {
     streams.slice(0, 4)
   );
 
-  const toggleStream = (stream) => {
+  const toggleStream = (stream: any) => {
     const exists = selectedStreams.find(
       (item) => item.channelId === stream.channelId
     );

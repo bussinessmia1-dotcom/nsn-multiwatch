@@ -228,9 +228,25 @@ export default function NSNMultiwatchStream() {
                   Multiwatch Mode Active
                 </div>
 
-                <button className="rounded-xl bg-yellow-500 px-4 py-2 text-sm font-bold text-black transition hover:bg-yellow-400">
-                  Watching
-                </button>
+                <div className="flex gap-2">
+                  <a
+                    href={`https://www.youtube.com/channel/${stream.channelId}/live`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-xl bg-red-500 px-4 py-2 text-sm font-bold text-white transition hover:bg-red-400"
+                  >
+                    Live Chat
+                  </a>
+
+                  <a
+                    href={`https://www.youtube.com/channel/${stream.channelId}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-xl bg-yellow-500 px-4 py-2 text-sm font-bold text-black transition hover:bg-yellow-400"
+                  >
+                    Like & Subscribe
+                  </a>
+                </div>
               </div>
             </div>
           ))}

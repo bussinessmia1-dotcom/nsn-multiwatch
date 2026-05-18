@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "NSN MULTIWATCH",
   description: "NSN Multiwatch Community",
+  icons: {
+    icon: "/nsnlogo.png",
+  },
 };
 
 export default function RootLayout({

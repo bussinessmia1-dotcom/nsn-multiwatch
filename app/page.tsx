@@ -120,9 +120,9 @@ export default function NSNMultiwatchStream() {
               NSN MULTIWATCH
             </h1>
 
-            <p className="mt-2 text-xs uppercase tracking-[0.25rem] text-yellow-200/60 md:text-sm">
+            <p className="mt-2 animate-pulse text-xs uppercase tracking-[0.25rem] text-yellow-300 drop-shadow-[0_0_10px_rgba(255,215,0,0.8)] md:text-sm">
               Watch community livestreams in one place
-            </p>
+          </p>
           </div>
 
           {/* NSN LOGO */}
@@ -252,6 +252,17 @@ export default function NSNMultiwatchStream() {
           ))}
         </div>
       </main>
+
+      {/* FOOTER WEBSITE */}
+      <footer className="mt-16 border-t border-yellow-500/10 bg-black/80 px-6 py-8 text-center backdrop-blur-xl">
+        <p className="text-sm font-medium tracking-wide text-yellow-400">
+          © 2026 NSN MULTIWATCH — Nine Six Nine. All Rights Reserved.
+        </p>
+
+        <p className="mt-2 animate-pulse text-xs italic tracking-widest text-yellow-200/60">
+          ✨ No guts, No glory ✨
+        </p>
+      </footer>
     </div>
   );
 }

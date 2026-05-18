@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 export default function NSNMultiwatchStream() {
   const streams = [
@@ -84,11 +85,10 @@ export default function NSNMultiwatchStream() {
       title: "claireaja",
       channelId: "UCLtAoc1vH3m_kE1CCKJgtNw",
     },
-
   ];
 
   const [selectedStreams, setSelectedStreams] = useState(
-    streams.slice(0, 4)
+    streams.slice(0, 0)
   );
 
   const toggleStream = (stream: any) => {
@@ -110,24 +110,31 @@ export default function NSNMultiwatchStream() {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* BACKGROUND */}
-      <div className="fixed inset-0 bg-[radial-gradient(circle_at_top,rgba(255,215,0,0.12),transparent_40%)] pointer-events-none" />
+      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top,rgba(255,215,0,0.12),transparent_40%)]" />
 
       {/* HEADER */}
       <header className="sticky top-0 z-50 border-b border-yellow-500/20 bg-black/90 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
           <div>
-            <h1 className="text-3xl md:text-5xl font-black tracking-[0.3rem] text-yellow-400">
+            <h1 className="text-3xl font-black tracking-[0.3rem] text-yellow-400 md:text-5xl">
               NSN MULTIWATCH
             </h1>
 
-            <p className="mt-2 text-xs md:text-sm uppercase tracking-[0.25rem] text-yellow-200/60">
+            <p className="mt-2 text-xs uppercase tracking-[0.25rem] text-yellow-200/60 md:text-sm">
               Watch community livestreams in one place
             </p>
           </div>
 
           {/* NSN LOGO */}
-          <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-yellow-500 bg-gradient-to-br from-yellow-300 to-yellow-600 text-xl font-black text-black shadow-2xl shadow-yellow-500/40">
-            NSN
+          <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-full border-2 border-yellow-500 shadow-2xl shadow-yellow-500/40">
+            <Image
+              src="/nsnlogo.png"
+              alt="NSN Logo"
+              width={64}
+              height={64}
+              className="h-full w-full object-cover"
+              priority
+            />
           </div>
         </div>
       </header>
